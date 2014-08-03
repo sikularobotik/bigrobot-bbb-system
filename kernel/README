@@ -1,0 +1,57 @@
+#################
+## COMPILATION ##
+#################
+
+## Notice: This is a partial -work in progress- procedure.
+##         Some steps are (mostly volontary) not complete.
+
+# Define some config environment variables
+KERN=3.14
+KERNSUB=12
+RT=9
+
+# Download kernel
+wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-${KERN}.${KERNSUB}.tar.xz
+
+# Download linux-rt patch
+wget https://www.kernel.org/pub/linux/kernel/projects/rt/${KERN}/patch-${KERN}.${KERNSUB}-rt${RT}.patch.xz
+
+# Untar kernel
+tar -xJf linux-${KERN}.${KERNSUB}.tar.xz
+
+# Patch kernel
+xz -cd patch-${KERN}.${KERNSUB}-rt${RT}.patch.xz | patch -d linux-${KERN}.${KERNSUB} -p1
+
+# Copy Sikula defconfig
+cp sikula_bbb_rt_defconfig linux-${KERN}.${KERNSUB}/arch/arm/configs/
+
+## Todo: Add DTS
+
+# Go to kernel directory
+cd linux-${KERN}.${KERNSUB}
+
+# Applying defconfig
+make ARCH=arm sikula_bbb_rt_defconfig
+
+# Compile kernel
+make ARCH=arm CROSS_COMPILE=archlinuxarm- zImage modules -j16
+
+## Todo: Compile modules & DTS
+
+
+##################
+## INSTALLATION ##
+##################
+
+## Notice: Environment variable $TARGET is supposed to be set with path to
+##         target rootfs (2nd partition on SD) while $BOOT is the path to
+##         target boot partition (1st partition on SD)
+
+# Copy kernel
+cp arch/arm/boot/zImage ${TARGET}/boot/zImage-sikula-rt
+
+# Install modules
+make ARCH=arm INSTALL_MOD_PATH=${TARGET}/ modules_install
+
+# Copy uEnv.txt (replace original)
+cp uEnv.txt ${BOOT}/uEnv.txt
