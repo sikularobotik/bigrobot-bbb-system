@@ -1,0 +1,6 @@
+Préalablement, il faut changer le "hostname" de la cible par "robot"
+
+Ici, il y a les scripts à exécuter sur la cible pour installer/configurer les programmes.
+1. Copier le dossier sur la cible
+2. Avoir accès au Net sur la cible
+3. Exécuter un script specifique ou install_all.sh
