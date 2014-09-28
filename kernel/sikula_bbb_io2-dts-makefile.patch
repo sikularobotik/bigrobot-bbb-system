@@ -1,0 +1,10 @@
+--- a/arch/arm/boot/dts/Makefile	2014-08-03 20:21:25.053940029 +0200
++++ b/arch/arm/boot/dts/Makefile	2014-08-03 20:22:06.183942421 +0200
+@@ -226,6 +226,7 @@
+ 	am335x-evmsk.dtb \
+ 	am335x-bone.dtb \
+ 	am335x-boneblack.dtb \
++	sikula_bbb_io2.dtb \
+ 	am335x-nano.dtb \
+ 	am335x-base0033.dtb \
+ 	am3517-evm.dtb \

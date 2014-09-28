@@ -25,7 +25,8 @@ xz -cd patch-${KERN}.${KERNSUB}-rt${RT}.patch.xz | patch -d linux-${KERN}.${KERN
 # Copy Sikula defconfig
 cp sikula_bbb_rt_defconfig linux-${KERN}.${KERNSUB}/arch/arm/configs/
 
-## Todo: Add DTS
+# Copy Sikula DTS for BBB+IO2
+cp sikula_bbb_io2.dts linux-${KERN}.${KERNSUB}/arch/arm/boot/dts/
 
 # Go to kernel directory
 cd linux-${KERN}.${KERNSUB}
@@ -33,10 +34,11 @@ cd linux-${KERN}.${KERNSUB}
 # Applying defconfig
 make ARCH=arm sikula_bbb_rt_defconfig
 
-# Compile kernel
-make ARCH=arm CROSS_COMPILE=archlinuxarm- zImage modules -j16
+# Patching DTS Makefile
+patch -p1 < sikula_bbb_io2-dts-makefile.patch
 
-## Todo: Compile modules & DTS
+# Compile kernel, modules and dtbs
+make ARCH=arm CROSS_COMPILE=archlinuxarm- zImage modules dtbs -j16
 
 
 ##################
@@ -49,6 +51,9 @@ make ARCH=arm CROSS_COMPILE=archlinuxarm- zImage modules -j16
 
 # Copy kernel
 cp arch/arm/boot/zImage ${TARGET}/boot/zImage-sikula-rt
+
+# Copy DTB
+cp arch/arm/boot/dts/sikula_bbb_io2.dtb ${TARGET}/boot/dtbs/
 
 # Install modules
 make ARCH=arm INSTALL_MOD_PATH=${TARGET}/ modules_install

@@ -1,5 +1,5 @@
 zimage=zImage-sikula-rt
-fdtfile=am335x-boneblack.dtb
+fdtfile=sikula_bbb_io2.dtb
 uenvcmd=run findmmc1; run findmmc0; if run loaduimage; then run loadfdt; run mmcboot; fi;
 findmmc1=if test $board_name = A335BNLT; then setenv mmc1 1; else setenv mmc1 0; fi
 findmmc0=setenv mmcdev 0; mmc dev ${mmcdev}; if mmc rescan; then setenv mmc0 1; else setenv mmc0 0; fi
