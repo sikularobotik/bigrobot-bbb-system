@@ -23,6 +23,9 @@
 };
 
 &am33xx_pinmux {
+	pinctrl-names = "default";
+	pinctrl-0 = <&sikula_gpios &clkout2_pin>;
+
 	sikula_gpios: pinmux_sikula_gpios_pins {
 		pinctrl-single,pins = <
 			0x090 0x37 /* Jack IN */
@@ -178,13 +181,5 @@
 	status = "okay";
 	adc {
 		ti,adc-channels = <0 1 2 3 4 5 6 7>;
-	};
-};
-
-/ {
-	hog {
-		pinctrl-names = "default";
-		pinctrl-0 = <&sikula_gpios>;
-		status = "okay";
 	};
 };
