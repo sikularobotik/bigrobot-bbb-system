@@ -7,8 +7,8 @@
 
 # Define some config environment variables
 KERN=3.14
-KERNSUB=12
-RT=9
+KERNSUB=34
+RT=31
 
 # Download kernel
 wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-${KERN}.${KERNSUB}.tar.xz
@@ -35,7 +35,7 @@ cd linux-${KERN}.${KERNSUB}
 make ARCH=arm sikula_bbb_rt_defconfig
 
 # Patching DTS Makefile
-patch -p1 < sikula_bbb_io2-dts-makefile.patch
+patch -p1 < ../sikula_bbb_io2-dts-makefile.patch
 
 # Compile kernel, modules and dtbs
 make ARCH=arm CROSS_COMPILE=archlinuxarm- zImage modules dtbs -j16
