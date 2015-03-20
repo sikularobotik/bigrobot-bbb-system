@@ -6,15 +6,15 @@
 ##         Some steps are (mostly volontary) not complete.
 
 # Define some config environment variables
-KERN=3.14
-KERNSUB=34
-RT=31
+KERN=3.18
+KERNSUB=9
+RT=5
 
 # Download kernel
-wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-${KERN}.${KERNSUB}.tar.xz
+wget -c https://www.kernel.org/pub/linux/kernel/v3.x/linux-${KERN}.${KERNSUB}.tar.xz
 
 # Download linux-rt patch
-wget https://www.kernel.org/pub/linux/kernel/projects/rt/${KERN}/patch-${KERN}.${KERNSUB}-rt${RT}.patch.xz
+wget -c https://www.kernel.org/pub/linux/kernel/projects/rt/${KERN}/patch-${KERN}.${KERNSUB}-rt${RT}.patch.xz
 
 # Untar kernel
 tar -xJf linux-${KERN}.${KERNSUB}.tar.xz
