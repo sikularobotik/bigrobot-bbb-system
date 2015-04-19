@@ -14,7 +14,7 @@ RT=5
 wget -c https://www.kernel.org/pub/linux/kernel/v3.x/linux-${KERN}.${KERNSUB}.tar.xz
 
 # Download linux-rt patch
-wget -c https://www.kernel.org/pub/linux/kernel/projects/rt/${KERN}/patch-${KERN}.${KERNSUB}-rt${RT}.patch.xz
+wget -c https://www.kernel.org/pub/linux/kernel/projects/rt/${KERN}/older/patch-${KERN}.${KERNSUB}-rt${RT}.patch.xz
 
 # Untar kernel
 tar -xJf linux-${KERN}.${KERNSUB}.tar.xz
