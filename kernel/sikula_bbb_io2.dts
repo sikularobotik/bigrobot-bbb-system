@@ -141,7 +141,7 @@
 	pinctrl-0 = <&sikula_uart4>;
 	rs485-rts-delay = <0 0>;
 	rs485-rts-active-high;
-	rts-gpio = <&gpio0 7 0>;
+	rts-gpio = <&gpio0 9 0>;
 	linux,rs485-enabled-at-boot-time;
 };
 
