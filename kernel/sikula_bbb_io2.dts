@@ -106,7 +106,7 @@
 	};
 	sikula_uart4: pinmux_sikula_uart4_pins {
 		pinctrl-single,pins = <
-			0x070 0x36 /* AX12_RX */
+			0x070 0x3E /* AX12_RX */
 			0x074 0x06 /* AX12_TX */
 			0x0d4 0x07 /* AX12_DIRECTION */
 		>;
