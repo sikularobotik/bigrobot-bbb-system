@@ -64,8 +64,10 @@
 			0x194 0x37 /* BP3 IN */
 			0x198 0x37 /* BP2 IN */
 			0x190 0x37 /* BP1 IN */
-			0x1a0 0x2f /* SERIAL2_EN2 OUT (1/2) */
-			0x164 0x07 /* SERIAL2_EN2 OUT (2/2) */
+			0x1b4 0x07 /* SERIAL2_EN2 (1/2) OUT */
+			0x1a8 0x2f /* SERIAL2_EN2 (2/2) disabled with INPUT */
+			0x1a0 0x2f /* CODER_L_A (1/2) disabled with INPUT*/
+			0x164 0x07 /* CODER_L_A (2/2) OUT */
 		>;
 	};
 	sikula_pwm0: pinmux_sikula_pwm0_pins {
