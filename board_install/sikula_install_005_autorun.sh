@@ -49,6 +49,19 @@ chmod +x /root/autorun/panel_topleft.sh
 
 cp /root/autorun/panel_topleft.sh /root/autorun/panel_topright.sh
 cp /root/autorun/panel_topleft.sh /root/autorun/panel_bottomright.sh
-cp /root/autorun/panel_topleft.sh /root/autorun/panel_bottomleft.sh
+
+cat << EOF > /root/autorun/panel_bottomleft.sh
+#!/bin/bash
+if [ -x /home/sikula/start.sh ]
+then
+	cd /home/sikula/
+	./start.sh
+else
+	echo \$0
+	/bin/bash # Start interactive shell, otherwise the panel closes
+fi
+EOF
+
+chmod +x /root/autorun/panel_bottomleft.sh
 
 echo "Connect to autorun scripts with ** sudo tmux attach -t sikula **" >> /etc/motd
