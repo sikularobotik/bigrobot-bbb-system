@@ -27,6 +27,7 @@ cat << EOF > /root/autorun/autorun.sh
 #!/bin/bash
 
 ifconfig eth0:0 192.168.0.99
+ifconfig eth0:1 192.168.1.99
 
 tmux_session=sikula
 autorum_dir=/root/autorun/
