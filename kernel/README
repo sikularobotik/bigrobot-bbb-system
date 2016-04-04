@@ -21,6 +21,7 @@ tar -xJf linux-${KERN}.${KERNSUB}.tar.xz
 
 # Patch kernel
 xz -cd patch-${KERN}.${KERNSUB}-rt${RT}.patch.xz | patch -d linux-${KERN}.${KERNSUB} -p1
+patch -d linux-${KERN}.${KERNSUB} -p1 < eqep.patch
 
 # Copy Sikula defconfig
 cp sikula_bbb_rt_defconfig linux-${KERN}.${KERNSUB}/arch/arm/configs/
