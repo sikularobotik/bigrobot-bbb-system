@@ -29,6 +29,10 @@ cat << EOF > /root/autorun/autorun.sh
 ifconfig eth0:0 192.168.0.99
 ifconfig eth0:1 192.168.1.99
 
+# EXTENAL RTC Hack (DS1307)
+echo ds1307 0x68 > /sys/devices/ocp/4819c000.i2c/i2c-2/new_device
+hwclock -s -f /dev/rtc1
+
 tmux_session=sikula
 autorum_dir=/root/autorun/
 
