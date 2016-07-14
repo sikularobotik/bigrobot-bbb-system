@@ -38,7 +38,7 @@ Créer la carte SD :
 
 Monter et flasher :
 
-    sudo cp output/images/{MLO,u-boot.img,uEnv.txt,zImage,*.dtb} /media/BOOT
+    sudo cp output/images/{MLO,u-boot.img,zImage,*.dtb} /media/BOOT
     
     dd if=output/images/rootfs.ext2 of=/dev/mmcblk0p2 bs=128k
 
