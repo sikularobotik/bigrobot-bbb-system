@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [ "$1" == "start" ]
+then
+	APP=./start.sh
+	cd /home/sikula/
+	[ -x $APP ] && tmux new-session -s "sikula" -d $APP
+fi
+
+exit $?
