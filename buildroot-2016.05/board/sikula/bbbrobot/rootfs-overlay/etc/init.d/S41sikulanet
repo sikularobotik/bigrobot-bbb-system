@@ -1,0 +1,14 @@
+#!/bin/sh
+
+if [ "$1" == "start" ]
+then
+	ifconfig eth0:0 192.168.0.99
+	ifconfig eth0:1 192.168.1.99
+	dhcpcd eth0 &
+
+	modprobe g_ether
+	ifconfig usb0 192.168.2.99
+	dnsmasq -a 192.168.2.99 -F 192.168.2.100,192.168.2.200
+fi
+
+exit $?
