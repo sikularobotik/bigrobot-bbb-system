@@ -140,6 +140,12 @@
 	status = "okay";
 	pinctrl-names = "default";
 	pinctrl-0 = <&sikula_i2c2>;
+
+	ds1307@68 {
+		compatible = "ds1307";
+		reg = <0x68>;
+		status = "okay";
+	};
 };
 
 &uart1 {
@@ -208,6 +214,10 @@
 	swap_inputs = <0>; /* Are channel A and channel B swapped? (0 - no, 1 - yes) */
 	invert_qa = <1>;   /* Should we invert the channel A input? */
 	invert_qb = <1>;   /* Should we invert the channel B input? */
+};
+
+&rtc {
+	status = "disabled";
 };
 
 &tscadc {
