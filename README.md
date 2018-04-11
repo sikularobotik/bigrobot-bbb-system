@@ -29,10 +29,14 @@ Créer la carte SD :
     
     /dev/mmcblk0p1 : start=        2048, size=       20480, type=4, bootable
     /dev/mmcblk0p2 : start=       22528, size=     3840000, type=83
+    /dev/mmcblk0p3 : start=     3862528, size=     3840000, type=83
     EOF
     
     # Create DOS partition
     sudo mkfs.vfat /dev/mmcblk0p1 -n BOOT
+
+    # Create EXT4 partition
+    sudo mkfs.ext4 -L LOGS /dev/mmcblk0p3
 
     sync
 
@@ -40,6 +44,6 @@ Monter et flasher :
 
     sudo cp output/images/{MLO,u-boot.img,zImage,*.dtb} /media/BOOT
     
-    dd if=output/images/rootfs.ext2 of=/dev/mmcblk0p2 bs=128k
+    dd if=output/images/rootfs.ext4 of=/dev/mmcblk0p2 bs=128k
 
     sync
