@@ -16,6 +16,7 @@ BR2_TARGET_GENERIC_ISSUE="Connect to autorun scripts with ** sudo tmux attach -t
 BR2_TARGET_GENERIC_ROOT_PASSWD="robotpass"
 BR2_TARGET_GENERIC_GETTY_PORT="ttyO0"
 BR2_ENABLE_LOCALE_WHITELIST="C fr"
+BR2_GENERATE_LOCALE="fr_FR en_US"
 BR2_TARGET_TZ_INFO=y
 BR2_TARGET_LOCALTIME="Europe/Paris"
 BR2_ROOTFS_USERS_TABLES="board/sikula/bbbrobot/sikula-user-table"
