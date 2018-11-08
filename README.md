@@ -47,3 +47,7 @@ Monter et flasher :
     dd if=output/images/rootfs.ext4 of=/dev/mmcblk0p2 bs=128k
 
     sync
+
+    resize2fs /dev/mmcblk0p2
+
+    sync
