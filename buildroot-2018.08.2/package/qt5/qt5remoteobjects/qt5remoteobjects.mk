@@ -1,0 +1,51 @@
+################################################################################
+#
+# qt5remoteobjects
+#
+################################################################################
+
+QT5REMOTEOBJECTS_VERSION = $(QT5_VERSION)
+QT5REMOTEOBJECTS_SITE = $(QT5_SITE)
+QT5REMOTEOBJECTS_SOURCE = qtremoteobjects-$(QT5_SOURCE_TARBALL_PREFIX)-$(QT5REMOTEOBJECTS_VERSION).tar.xz
+QT5REMOTEOBJECTS_DEPENDENCIES = qt5base
+QT5REMOTEOBJECTS_INSTALL_STAGING = YES
+QT5REMOTEOBJECTS_LICENSE = GPL-2.0+ or LGPL-3.0, GPL-3.0 with exception(tools), GFDL-1.3 (docs)
+QT5REMOTEOBJECTS_LICENSE_FILES = LICENSE.GPL2 LICENSE.GPL3 LICENSE.GPL3-EXCEPT LICENSE.LGPL3 LICENSE.FDL
+
+define QT5REMOTEOBJECTS_CONFIGURE_CMDS
+	(cd $(@D); $(TARGET_MAKE_ENV) $(HOST_DIR)/bin/qmake)
+endef
+
+define QT5REMOTEOBJECTS_BUILD_CMDS
+	$(TARGET_MAKE_ENV) $(MAKE) -C $(@D)
+endef
+
+define QT5REMOTEOBJECTS_INSTALL_STAGING_CMDS
+	$(TARGET_MAKE_ENV) $(MAKE) -C $(@D) install
+endef
+
+ifeq ($(BR2_STATIC_LIBS),)
+define QT5REMOTEOBJECTS_INSTALL_TARGET_LIBS
+	cp -dpf $(STAGING_DIR)/usr/lib/libQt5RemoteObjects.so.* $(TARGET_DIR)/usr/lib
+endef
+endif
+
+ifeq ($(BR2_PACKAGE_QT5DECLARATIVE_QUICK),y)
+define QT5REMOTEOBJECTS_INSTALL_TARGET_QMLS
+	cp -dpfr $(STAGING_DIR)/usr/qml/QtQml/RemoteObjects $(TARGET_DIR)/usr/qml
+endef
+endif
+
+ifeq ($(BR2_PACKAGE_QT5BASE_EXAMPLES),y)
+define QT5REMOTEOBJECTS_INSTALL_TARGET_EXAMPLES
+	cp -dpfr $(STAGING_DIR)/usr/lib/qt/examples/remoteobjects $(TARGET_DIR)/usr/lib/qt/examples/
+endef
+endif
+
+define QT5REMOTEOBJECTS_INSTALL_TARGET_CMDS
+	$(QT5REMOTEOBJECTS_INSTALL_TARGET_LIBS)
+	$(QT5REMOTEOBJECTS_INSTALL_TARGET_QMLS)
+	$(QT5REMOTEOBJECTS_INSTALL_TARGET_EXAMPLES)
+endef
+
+$(eval $(generic-package))
