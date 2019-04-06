@@ -8,7 +8,16 @@ then
 
 	modprobe g_ether
 	ifconfig usb0 192.168.2.99
-	dnsmasq -a 192.168.2.99 -F 192.168.2.100,192.168.2.200
+	dnsmasq -z -a 192.168.2.99 -F 192.168.2.100,192.168.2.200 -l /var/log/dnsmasq.usb0.leases
+
+	modprobe rt2800usb
+	WLAN=$(ifconfig wlan0 >/dev/null 2>&1; echo $?)
+	if [ $WLAN == 0 ]
+	then
+		ifconfig wlan0 192.168.3.99
+		hostapd -B /etc/hostapd.conf
+		dnsmasq -z -a 192.168.3.99 -F 192.168.3.100,192.168.3.200 -l /var/log/dnsmasq.wlan0.leases
+	fi
 fi
 
 exit $?
