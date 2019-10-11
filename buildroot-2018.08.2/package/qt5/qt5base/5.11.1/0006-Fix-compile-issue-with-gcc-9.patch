@@ -1,0 +1,24 @@
+From 97e3dd92b04962bcb76ee8a82966745333307c43 Mon Sep 17 00:00:00 2001
+From: JackDesBwa <jackdesbwa@gmail.com>
+Date: Fri, 11 Oct 2019 13:26:32 +0200
+Subject: [PATCH] Fix compile issue with gcc 9
+
+---
+ src/corelib/global/qrandom.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/corelib/global/qrandom.cpp b/src/corelib/global/qrandom.cpp
+index ebf9864..577736a 100644
+--- a/src/corelib/global/qrandom.cpp
++++ b/src/corelib/global/qrandom.cpp
+@@ -218,6 +218,7 @@ struct QRandomGenerator::SystemGenerator
+ #endif // Q_OS_WINRT
+ 
+     static SystemGenerator &self();
++    typedef quint32 result_type;
+     void generate(quint32 *begin, quint32 *end) Q_DECL_NOEXCEPT_EXPR(FillBufferNoexcept);
+ 
+     // For std::mersenne_twister_engine implementations that use something
+-- 
+2.23.0
+
