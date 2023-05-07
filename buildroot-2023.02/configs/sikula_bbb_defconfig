@@ -22,6 +22,7 @@ BR2_ENABLE_LOCALE_WHITELIST="C fr"
 BR2_GENERATE_LOCALE="fr_FR en_US"
 BR2_TARGET_TZ_INFO=y
 BR2_TARGET_LOCALTIME="Europe/Paris"
+BR2_ROOTFS_USERS_TABLES="board/sikula/bbbrobot/sikula-user-table"
 
 # Image
 BR2_ROOTFS_POST_BUILD_SCRIPT="board/sikula/bbbrobot/post-build.sh"
