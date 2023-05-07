@@ -1,0 +1,24 @@
+#!/bin/sh
+
+if [ "$1" == "start" ]
+then
+	if mount | grep /dev/root | grep ro,
+	then
+		# Disable led "ON"
+		echo 86 > /sys/class/gpio/export
+		echo out > /sys/class/gpio/gpio86/direction
+		echo 1 > /sys/class/gpio/gpio86/value
+
+		# FSCK
+		if fsck /dev/mmcblk0p2
+		then
+			mount -o remount,rw /
+			echo 0 > /sys/class/gpio/gpio86/value
+		fi
+	fi
+	APP=./start.sh
+	cd /home/sikula/
+	[ -x $APP ] && tmux new-session -s "sikula" -d $APP
+fi
+
+exit $?
