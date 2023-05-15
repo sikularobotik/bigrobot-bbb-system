@@ -35,6 +35,7 @@ BR2_LINUX_KERNEL=y
 BR2_LINUX_KERNEL_LATEST_CIP_RT_VERSION=y
 BR2_LINUX_KERNEL_USE_CUSTOM_CONFIG=y
 BR2_LINUX_KERNEL_CUSTOM_CONFIG_FILE="board/sikula/bbbrobot/linux_defconfig"
+BR2_LINUX_KERNEL_LZO=y
 BR2_LINUX_KERNEL_DTS_SUPPORT=y
 BR2_LINUX_KERNEL_INTREE_DTS_NAME="am335x-evm am335x-bone am335x-boneblack am335x-bonegreen am335x-evmsk am335x-boneblue am335x-boneblack-wireless am335x-bonegreen-wireless"
 BR2_LINUX_KERNEL_CUSTOM_DTS_PATH="board/sikula/bbbrobot/sikula_bbb_io2.dts"
