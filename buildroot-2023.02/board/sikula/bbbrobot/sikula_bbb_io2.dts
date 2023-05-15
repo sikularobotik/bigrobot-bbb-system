@@ -1,7 +1,3 @@
-// SPDX-License-Identifier: GPL-2.0-only
-/*
- * Copyright (C) 2012 Texas Instruments Incorporated - https://www.ti.com/
- */
 /dts-v1/;
 
 #include "am33xx.dtsi"
@@ -9,7 +5,7 @@
 #include "am335x-boneblack-common.dtsi"
 
 / {
-	model = "TI AM335x BeagleBone Black";
+	model = "TI AM335x BeagleBone Black - Sikula";
 	compatible = "ti,am335x-bone-black", "ti,am335x-bone", "ti,am33xx";
 };
 
@@ -24,146 +20,209 @@
 	};
 };
 
-&gpio0 {
-	gpio-line-names =
-		"[ethernet]",
-		"[ethernet]",
-		"P9_22 [spi0_sclk]",
-		"P9_21 [spi0_d0]",
-		"P9_18 [spi0_d1]",
-		"P9_17 [spi0_cs0]",
-		"[sd card]",
-		"P9_42A [ecappwm0]",
-		"P8_35 [hdmi]",
-		"P8_33 [hdmi]",
-		"P8_31 [hdmi]",
-		"P8_32 [hdmi]",
-		"P9_20 [i2c2_sda]",
-		"P9_19 [i2c2_scl]",
-		"P9_26 [uart1_rxd]",
-		"P9_24 [uart1_txd]",
-		"[ethernet]",
-		"[ethernet]",
-		"[usb]",
-		"[hdmi]",
-		"P9_41B",
-		"[ethernet]",
-		"P8_19 [ehrpwm2a]",
-		"P8_13 [ehrpwm2b]",
-		"[NC]",
-		"[NC]",
-		"P8_14",
-		"P8_17",
-		"[ethernet]",
-		"[ethernet]",
-		"P9_11 [uart4_rxd]",
-		"P9_13 [uart4_txd]";
+&am33xx_pinmux {
+	pinctrl-names = "default";
+	pinctrl-0 = <&sikula_gpios &clkout2_pin>;
+
+	sikula_gpios: pinmux_sikula_gpios_pins {
+		pinctrl-single,pins = <
+			AM33XX_PADCONF(AM335X_PIN_GPMC_ADVN_ALE, PIN_INPUT_PULLUP, MUX_MODE7) /* Jack IN */
+			AM33XX_PADCONF(AM335X_PIN_GPMC_OEN_REN, PIN_INPUT, MUX_MODE7) /* CPT4 IO */
+			AM33XX_PADCONF(AM335X_PIN_GPMC_BEN0_CLE, PIN_INPUT, MUX_MODE7) /* CPT5 IO */
+			AM33XX_PADCONF(AM335X_PIN_GPMC_WEN, PIN_INPUT, MUX_MODE7) /* CPT6 IO */
+			AM33XX_PADCONF(AM335X_PIN_GPMC_AD10, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* MOTOR_IND3 OUT */
+			AM33XX_PADCONF(AM335X_PIN_GPMC_AD15, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* MOTOR_IND4 OUT */
+			AM33XX_PADCONF(AM335X_PIN_GPMC_AD14, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* MOTOR_EN OUT */
+			AM33XX_PADCONF(AM335X_PIN_GPMC_AD11, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* MOTOR_ING2 OUT */
+			AM33XX_PADCONF(AM335X_PIN_GPMC_CLK, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* MOTOR_ING1 OUT */
+			AM33XX_PADCONF(AM335X_PIN_GPMC_CSN0, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* TRSL_BIDI_OE123 OUT */
+			AM33XX_PADCONF(AM335X_PIN_LCD_VSYNC, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* LED0 OUT */
+			AM33XX_PADCONF(AM335X_PIN_LCD_PCLK, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* LED1 OUT */
+			AM33XX_PADCONF(AM335X_PIN_LCD_HSYNC, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* LED2 OUT */
+			AM33XX_PADCONF(AM335X_PIN_LCD_AC_BIAS_EN, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* LED3 OUT */
+			AM33XX_PADCONF(AM335X_PIN_LCD_DATA14, PIN_INPUT_PULLUP, MUX_MODE7) /* BP9 IN */
+			AM33XX_PADCONF(AM335X_PIN_LCD_DATA15, PIN_INPUT_PULLUP, MUX_MODE7) /* BP8 IN */
+			AM33XX_PADCONF(AM335X_PIN_LCD_DATA11, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* MOS11 OUT */
+			AM33XX_PADCONF(AM335X_PIN_LCD_DATA12, PIN_INPUT_PULLUP, MUX_MODE7) /* BP7 IN */
+			AM33XX_PADCONF(AM335X_PIN_LCD_DATA10, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* MOS12 OUT */
+			AM33XX_PADCONF(AM335X_PIN_LCD_DATA8, PIN_INPUT_PULLUP, MUX_MODE7) /* BP6 IN */
+			AM33XX_PADCONF(AM335X_PIN_LCD_DATA9, PIN_INPUT_PULLUP, MUX_MODE7) /* BP5 IN */
+			AM33XX_PADCONF(AM335X_PIN_LCD_DATA6, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* MOS21 OUT */
+			AM33XX_PADCONF(AM335X_PIN_LCD_DATA7, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* MOS22 OUT */
+			AM33XX_PADCONF(AM335X_PIN_LCD_DATA4, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* LED4 OUT */
+			AM33XX_PADCONF(AM335X_PIN_LCD_DATA5, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* LED5 OUT */
+			AM33XX_PADCONF(AM335X_PIN_LCD_DATA2, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* LED6 OUT */
+			AM33XX_PADCONF(AM335X_PIN_LCD_DATA3, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* LED7 OUT */
+			AM33XX_PADCONF(AM335X_PIN_LCD_DATA0, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* MOS31 OUT */
+			AM33XX_PADCONF(AM335X_PIN_LCD_DATA1, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* MOS32 OUT */
+			AM33XX_PADCONF(AM335X_PIN_GPMC_BEN1, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* AX12_EN_REG OUT */
+			AM33XX_PADCONF(AM335X_PIN_GPMC_A0, PIN_INPUT, MUX_MODE7) /* CPT5V5 IO */
+			AM33XX_PADCONF(AM335X_PIN_GPMC_A1, PIN_INPUT_PULLUP, MUX_MODE7) /* SERIAL2_DIR2 IN */
+			AM33XX_PADCONF(AM335X_PIN_MCASP0_AHCLKR, PIN_INPUT_PULLUP, MUX_MODE7) /* BP4 IN */
+			AM33XX_PADCONF(AM335X_PIN_MCASP0_FSX, PIN_INPUT_PULLUP, MUX_MODE7) /* BP3 IN */
+			AM33XX_PADCONF(AM335X_PIN_MCASP0_AXR0, PIN_INPUT_PULLUP, MUX_MODE7) /* BP2 IN */
+			AM33XX_PADCONF(AM335X_PIN_MCASP0_ACLKX, PIN_INPUT_PULLUP, MUX_MODE7) /* BP1 IN */
+			AM33XX_PADCONF(AM335X_PIN_XDMA_EVENT_INTR1, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* SERIAL2_EN2 (1/2) OUT */
+			AM33XX_PADCONF(AM335X_PIN_MCASP0_AXR1, PIN_INPUT, MUX_MODE7) /* SERIAL2_EN2 (2/2) disabled with INPUT */
+		>;
+	};
+	sikula_pwm0: pinmux_sikula_pwm0_pins {
+		pinctrl-single,pins = <
+			AM33XX_PADCONF(AM335X_PIN_SPI0_D0, PIN_OUTPUT, MUX_MODE3) /* SERVO3 */
+			AM33XX_PADCONF(AM335X_PIN_SPI0_SCLK, PIN_OUTPUT, MUX_MODE3) /* SERVO4 */
+		>;
+	};
+	sikula_eqep0: pinmux_sikula_eqep0_pins {
+		pinctrl-single,pins = <
+			AM33XX_PADCONF(AM335X_PIN_MCASP0_ACLKR, PIN_INPUT_PULLUP, MUX_MODE1) /* CODER_L_A (1/2) QEP_INPUT */
+			AM33XX_PADCONF(AM335X_PIN_ECAP0_IN_PWM0_OUT, PIN_INPUT, MUX_MODE7) /* CODER_L_A (2/2) disabled with INPUT */
+			AM33XX_PADCONF(AM335X_PIN_MCASP0_FSR, PIN_INPUT_PULLUP, MUX_MODE1) /* CODER_L_B */
+		>;
+	};
+	sikula_pwm1: pinmux_sikula_pwm1_pins {
+		pinctrl-single,pins = <
+			AM33XX_PADCONF(AM335X_PIN_GPMC_A2, PIN_OUTPUT, MUX_MODE6) /* SERVO1 */
+			AM33XX_PADCONF(AM335X_PIN_GPMC_A3, PIN_OUTPUT, MUX_MODE6) /* SERVO2 */
+		>;
+	};
+	sikula_pwm2: pinmux_sikula_pwm2_pins {
+		pinctrl-single,pins = <
+			AM33XX_PADCONF(AM335X_PIN_GPMC_AD9, PIN_OUTPUT, MUX_MODE4) /* MOTOR PWM R */
+			AM33XX_PADCONF(AM335X_PIN_GPMC_AD8, PIN_OUTPUT, MUX_MODE4) /* MOTOR PWM L */
+		>;
+	};
+	sikula_eqep2: pinmux_sikula_eqep2_pins {
+		pinctrl-single,pins = <
+			AM33XX_PADCONF(AM335X_PIN_GPMC_AD12, PIN_INPUT_PULLUP, MUX_MODE4) /* CODER_R_A */
+			AM33XX_PADCONF(AM335X_PIN_GPMC_AD13, PIN_INPUT_PULLUP, MUX_MODE4) /* CODER_R_B */
+		>;
+	};
+	sikula_i2c1: pinmux_sikula_i2c1_pins {
+		pinctrl-single,pins = <
+			AM33XX_PADCONF(AM335X_PIN_SPI0_CS0, PIN_INPUT_PULLUP, MUX_MODE2) /* I2C1_SCL */
+			AM33XX_PADCONF(AM335X_PIN_SPI0_D1, PIN_INPUT_PULLUP, MUX_MODE2) /* I2C1_SDA */
+		>;
+	};
+	sikula_i2c2: pinmux_sikula_i2c2_pins {
+		pinctrl-single,pins = <
+			AM33XX_PADCONF(AM335X_PIN_UART1_RTSN, PIN_INPUT_PULLUP, MUX_MODE3) /* I2C2_SCL */
+			AM33XX_PADCONF(AM335X_PIN_UART1_CTSN, PIN_INPUT_PULLUP, MUX_MODE3) /* I2C2_SDA */
+		>;
+	};
+	sikula_uart1: pinmux_sikula_uart1_pins {
+		pinctrl-single,pins = <
+			AM33XX_PADCONF(AM335X_PIN_UART1_TXD, PIN_OUTPUT, MUX_MODE0) /* SERIAL2_TXD2 */
+			AM33XX_PADCONF(AM335X_PIN_UART1_RXD, PIN_INPUT_PULLUP, MUX_MODE0) /* SERIAL2_RXD2 */
+		>;
+	};
+	sikula_uart4: pinmux_sikula_uart4_pins {
+		pinctrl-single,pins = <
+			AM33XX_PADCONF(AM335X_PIN_GPMC_WAIT0, PIN_INPUT, MUX_MODE6) /* AX12_RX */
+			AM33XX_PADCONF(AM335X_PIN_GPMC_WPN, PIN_OUTPUT, MUX_MODE6) /* AX12_TX */
+			AM33XX_PADCONF(AM335X_PIN_LCD_DATA13, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* AX12_DIRECTION */
+		>;
+	};
 };
 
-&gpio1 {
-	gpio-line-names =
-		"P8_25 [emmc]",
-		"[emmc]",
-		"P8_5 [emmc]",
-		"P8_6 [emmc]",
-		"P8_23 [emmc]",
-		"P8_22 [emmc]",
-		"P8_3 [emmc]",
-		"P8_4 [emmc]",
-		"[NC]",
-		"[NC]",
-		"[NC]",
-		"[NC]",
-		"P8_12",
-		"P8_11",
-		"P8_16",
-		"P8_15",
-		"P9_15A",
-		"P9_23",
-		"P9_14 [ehrpwm1a]",
-		"P9_16 [ehrpwm1b]",
-		"[emmc]",
-		"[usr0 led]",
-		"[usr1 led]",
-		"[usr2 led]",
-		"[usr3 led]",
-		"[hdmi]",
-		"[usb]",
-		"[hdmi audio]",
-		"P9_12",
-		"P8_26",
-		"P8_21 [emmc]",
-		"P8_20 [emmc]";
+&i2c1 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&sikula_i2c1>;
 };
 
-&gpio2 {
-	gpio-line-names =
-		"P9_15B",
-		"P8_18",
-		"P8_7",
-		"P8_8",
-		"P8_10",
-		"P8_9",
-		"P8_45 [hdmi]",
-		"P8_46 [hdmi]",
-		"P8_43 [hdmi]",
-		"P8_44 [hdmi]",
-		"P8_41 [hdmi]",
-		"P8_42 [hdmi]",
-		"P8_39 [hdmi]",
-		"P8_40 [hdmi]",
-		"P8_37 [hdmi]",
-		"P8_38 [hdmi]",
-		"P8_36 [hdmi]",
-		"P8_34 [hdmi]",
-		"[ethernet]",
-		"[ethernet]",
-		"[ethernet]",
-		"[ethernet]",
-		"P8_27 [hdmi]",
-		"P8_29 [hdmi]",
-		"P8_28 [hdmi]",
-		"P8_30 [hdmi]",
-		"[emmc]",
-		"[emmc]",
-		"[emmc]",
-		"[emmc]",
-		"[emmc]",
-		"[emmc]";
+&i2c2 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&sikula_i2c2>;
+
+	ds1307@68 {
+		compatible = "ds1307";
+		reg = <0x68>;
+		status = "okay";
+	};
 };
 
-&gpio3 {
-	gpio-line-names =
-		"[ethernet]",
-		"[ethernet]",
-		"[ethernet]",
-		"[ethernet]",
-		"[ethernet]",
-		"[i2c0]",
-		"[i2c0]",
-		"[emu]",
-		"[emu]",
-		"[ethernet]",
-		"[ethernet]",
-		"[NC]",
-		"[NC]",
-		"[usb]",
-		"P9_31 [spi1_sclk]",
-		"P9_29 [spi1_d0]",
-		"P9_30 [spi1_d1]",
-		"P9_28 [spi1_cs0]",
-		"P9_42B [ecappwm0]",
-		"P9_27",
-		"P9_41A",
-		"P9_25",
-		"[NC]",
-		"[NC]",
-		"[NC]",
-		"[NC]",
-		"[NC]",
-		"[NC]",
-		"[NC]",
-		"[NC]",
-		"[NC]",
-		"[NC]";
+&uart1 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&sikula_uart1>;
+};
+
+&uart4 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&sikula_uart4>;
+	rs485-rts-delay = <0 0>;
+	rs485-rts-active-high;
+	rts-gpios = <&gpio0 9 GPIO_ACTIVE_HIGH>;
+	linux,rs485-enabled-at-boot-time;
+};
+
+&epwmss0 {
+	status = "okay";
+};
+
+&ehrpwm0 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&sikula_pwm0>;
+};
+
+&epwmss0 {
+	eqep0: counter@180 {
+		compatible = "ti,am3352-eqep";
+		reg = <0x180 0x80>;
+		clocks = <&l4ls_gclk>;
+		clock-names = "fck";
+		interrupts = <79>;
+
+		status = "okay";
+		pinctrl-names = "default";
+		pinctrl-0 = <&sikula_eqep0>;
+	};
+};
+
+&epwmss1 {
+	status = "okay";
+};
+
+&ehrpwm1 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&sikula_pwm1>;
+};
+
+&epwmss2 {
+	status = "okay";
+};
+
+&ehrpwm2 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&sikula_pwm2>;
+};
+
+&epwmss2 {
+	eqep2: counter@180 {
+		compatible = "ti,am3352-eqep";
+		reg = <0x180 0x80>;
+		clocks = <&l4ls_gclk>;
+		clock-names = "fck";
+		interrupts = <89>;
+
+		status = "okay";
+		pinctrl-names = "default";
+		pinctrl-0 = <&sikula_eqep2>;
+	};
+};
+
+&rtc {
+	status = "disabled";
+};
+
+&tscadc {
+	status = "okay";
+	adc {
+		ti,adc-channels = <0 1 2 3 4 5 6 7>;
+	};
 };
