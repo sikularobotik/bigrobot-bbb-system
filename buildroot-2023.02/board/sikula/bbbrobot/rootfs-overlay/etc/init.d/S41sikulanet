@@ -30,7 +30,18 @@ fi
 
 if [ "$1" == "start_wlan0_station" ]
 then
-	wpa_passphrase "$2" "$3" | grep -v '#psk' > /tmp/wpa.conf
+	if [ "$3" == "psk" ]
+	then
+		echo "network={"       > /tmp/wpa.conf
+		echo -n "    ssid=\"" >> /tmp/wpa.conf
+		echo -n $2            >> /tmp/wpa.conf
+		echo "\""             >> /tmp/wpa.conf
+		echo -n "    psk="    >> /tmp/wpa.conf
+		echo $4               >> /tmp/wpa.conf
+		echo "}"              >> /tmp/wpa.conf
+	else
+		wpa_passphrase "$2" "$3" | grep -v '#psk' > /tmp/wpa.conf
+	fi
 
 	wpa_supplicant -c /tmp/wpa.conf -i wlan0 &
 	dhcpcd wlan0 &
