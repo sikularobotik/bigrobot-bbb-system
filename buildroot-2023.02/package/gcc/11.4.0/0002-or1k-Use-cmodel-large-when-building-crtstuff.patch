@@ -1,6 +1,6 @@
-From 3499ecd7c93c4c431cab83312bc5eabbf383c182 Mon Sep 17 00:00:00 2001
+From f75178ccd2f5e4d73e27cccffffada859b87be7d Mon Sep 17 00:00:00 2001
 From: Stafford Horne <shorne@gmail.com>
-Date: Sun, 2 May 2021 06:11:45 +0900
+Date: Wed, 21 Apr 2021 05:33:15 +0900
 Subject: [PATCH] or1k: Use cmodel=large when building crtstuff
 
 When linking gcc runtime objects into large binaries the link may fail
@@ -17,11 +17,15 @@ This patch builds the gcc crtstuff binaries always with the
 
 libgcc/ChangeLog:
 
-	PR 99783
+	PR target/99783
 	* config.host (or1k-*, tmake_file): Add or1k/t-crtstuff.
 	* config/or1k/t-crtstuff: New file.
 
+Upstream: da8a9d695b3c4b9397b5d9a27660bfa48af8d707
+
 Signed-off-by: Giulio Benetti <giulio.benetti@benettiengineering.com>
+[Romain: add Upstream tag]
+Signed-off-by: Romain Naour <romain.naour@gmail.com>
 ---
  libgcc/config.host            | 4 ++--
  libgcc/config/or1k/t-crtstuff | 2 ++
@@ -29,10 +33,10 @@ Signed-off-by: Giulio Benetti <giulio.benetti@benettiengineering.com>
  create mode 100644 libgcc/config/or1k/t-crtstuff
 
 diff --git a/libgcc/config.host b/libgcc/config.host
-index 89f41b56000..1210704d7e8 100644
+index 45f8e19ada4..5523345abb0 100644
 --- a/libgcc/config.host
 +++ b/libgcc/config.host
-@@ -1137,12 +1137,12 @@ nios2-*-*)
+@@ -1150,12 +1150,12 @@ nios2-*-*)
  	extra_parts="$extra_parts crti.o crtn.o"
  	;;
  or1k-*-linux*)
