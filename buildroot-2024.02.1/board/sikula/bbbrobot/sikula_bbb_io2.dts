@@ -1,0 +1,228 @@
+/dts-v1/;
+
+#include "am33xx.dtsi"
+#include "am335x-bone-common.dtsi"
+#include "am335x-boneblack-common.dtsi"
+
+/ {
+	model = "TI AM335x BeagleBone Black - Sikula";
+	compatible = "ti,am335x-bone-black", "ti,am335x-bone", "ti,am33xx";
+};
+
+&cpu0_opp_table {
+	/*
+	 * All PG 2.0 silicon may not support 1GHz but some of the early
+	 * BeagleBone Blacks have PG 2.0 silicon which is guaranteed
+	 * to support 1GHz OPP so enable it for PG 2.0 on this board.
+	 */
+	oppnitro-1000000000 {
+		opp-supported-hw = <0x06 0x0100>;
+	};
+};
+
+&am33xx_pinmux {
+	pinctrl-names = "default";
+	pinctrl-0 = <&sikula_gpios &clkout2_pin>;
+
+	sikula_gpios: pinmux_sikula_gpios_pins {
+		pinctrl-single,pins = <
+			AM33XX_PADCONF(AM335X_PIN_GPMC_ADVN_ALE, PIN_INPUT_PULLUP, MUX_MODE7) /* Jack IN */
+			AM33XX_PADCONF(AM335X_PIN_GPMC_OEN_REN, PIN_INPUT, MUX_MODE7) /* CPT4 IO */
+			AM33XX_PADCONF(AM335X_PIN_GPMC_BEN0_CLE, PIN_INPUT, MUX_MODE7) /* CPT5 IO */
+			AM33XX_PADCONF(AM335X_PIN_GPMC_WEN, PIN_INPUT, MUX_MODE7) /* CPT6 IO */
+			AM33XX_PADCONF(AM335X_PIN_GPMC_AD10, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* MOTOR_IND3 OUT */
+			AM33XX_PADCONF(AM335X_PIN_GPMC_AD15, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* MOTOR_IND4 OUT */
+			AM33XX_PADCONF(AM335X_PIN_GPMC_AD14, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* MOTOR_EN OUT */
+			AM33XX_PADCONF(AM335X_PIN_GPMC_AD11, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* MOTOR_ING2 OUT */
+			AM33XX_PADCONF(AM335X_PIN_GPMC_CLK, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* MOTOR_ING1 OUT */
+			AM33XX_PADCONF(AM335X_PIN_GPMC_CSN0, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* TRSL_BIDI_OE123 OUT */
+			AM33XX_PADCONF(AM335X_PIN_LCD_VSYNC, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* LED0 OUT */
+			AM33XX_PADCONF(AM335X_PIN_LCD_PCLK, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* LED1 OUT */
+			AM33XX_PADCONF(AM335X_PIN_LCD_HSYNC, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* LED2 OUT */
+			AM33XX_PADCONF(AM335X_PIN_LCD_AC_BIAS_EN, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* LED3 OUT */
+			AM33XX_PADCONF(AM335X_PIN_LCD_DATA14, PIN_INPUT_PULLUP, MUX_MODE7) /* BP9 IN */
+			AM33XX_PADCONF(AM335X_PIN_LCD_DATA15, PIN_INPUT_PULLUP, MUX_MODE7) /* BP8 IN */
+			AM33XX_PADCONF(AM335X_PIN_LCD_DATA11, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* MOS11 OUT */
+			AM33XX_PADCONF(AM335X_PIN_LCD_DATA12, PIN_INPUT_PULLUP, MUX_MODE7) /* BP7 IN */
+			AM33XX_PADCONF(AM335X_PIN_LCD_DATA10, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* MOS12 OUT */
+			AM33XX_PADCONF(AM335X_PIN_LCD_DATA8, PIN_INPUT_PULLUP, MUX_MODE7) /* BP6 IN */
+			AM33XX_PADCONF(AM335X_PIN_LCD_DATA9, PIN_INPUT_PULLUP, MUX_MODE7) /* BP5 IN */
+			AM33XX_PADCONF(AM335X_PIN_LCD_DATA6, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* MOS21 OUT */
+			AM33XX_PADCONF(AM335X_PIN_LCD_DATA7, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* MOS22 OUT */
+			AM33XX_PADCONF(AM335X_PIN_LCD_DATA4, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* LED4 OUT */
+			AM33XX_PADCONF(AM335X_PIN_LCD_DATA5, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* LED5 OUT */
+			AM33XX_PADCONF(AM335X_PIN_LCD_DATA2, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* LED6 OUT */
+			AM33XX_PADCONF(AM335X_PIN_LCD_DATA3, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* LED7 OUT */
+			AM33XX_PADCONF(AM335X_PIN_LCD_DATA0, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* MOS31 OUT */
+			AM33XX_PADCONF(AM335X_PIN_LCD_DATA1, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* MOS32 OUT */
+			AM33XX_PADCONF(AM335X_PIN_GPMC_BEN1, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* AX12_EN_REG OUT */
+			AM33XX_PADCONF(AM335X_PIN_GPMC_A0, PIN_INPUT, MUX_MODE7) /* CPT5V5 IO */
+			AM33XX_PADCONF(AM335X_PIN_GPMC_A1, PIN_INPUT_PULLUP, MUX_MODE7) /* SERIAL2_DIR2 IN */
+			AM33XX_PADCONF(AM335X_PIN_MCASP0_AHCLKR, PIN_INPUT_PULLUP, MUX_MODE7) /* BP4 IN */
+			AM33XX_PADCONF(AM335X_PIN_MCASP0_FSX, PIN_INPUT_PULLUP, MUX_MODE7) /* BP3 IN */
+			AM33XX_PADCONF(AM335X_PIN_MCASP0_AXR0, PIN_INPUT_PULLUP, MUX_MODE7) /* BP2 IN */
+			AM33XX_PADCONF(AM335X_PIN_MCASP0_ACLKX, PIN_INPUT_PULLUP, MUX_MODE7) /* BP1 IN */
+			AM33XX_PADCONF(AM335X_PIN_XDMA_EVENT_INTR1, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* SERIAL2_EN2 (1/2) OUT */
+			AM33XX_PADCONF(AM335X_PIN_MCASP0_AXR1, PIN_INPUT, MUX_MODE7) /* SERIAL2_EN2 (2/2) disabled with INPUT */
+		>;
+	};
+	sikula_pwm0: pinmux_sikula_pwm0_pins {
+		pinctrl-single,pins = <
+			AM33XX_PADCONF(AM335X_PIN_SPI0_D0, PIN_OUTPUT, MUX_MODE3) /* SERVO3 */
+			AM33XX_PADCONF(AM335X_PIN_SPI0_SCLK, PIN_OUTPUT, MUX_MODE3) /* SERVO4 */
+		>;
+	};
+	sikula_eqep0: pinmux_sikula_eqep0_pins {
+		pinctrl-single,pins = <
+			AM33XX_PADCONF(AM335X_PIN_MCASP0_ACLKR, PIN_INPUT_PULLUP, MUX_MODE1) /* CODER_L_A (1/2) QEP_INPUT */
+			AM33XX_PADCONF(AM335X_PIN_ECAP0_IN_PWM0_OUT, PIN_INPUT, MUX_MODE7) /* CODER_L_A (2/2) disabled with INPUT */
+			AM33XX_PADCONF(AM335X_PIN_MCASP0_FSR, PIN_INPUT_PULLUP, MUX_MODE1) /* CODER_L_B */
+		>;
+	};
+	sikula_pwm1: pinmux_sikula_pwm1_pins {
+		pinctrl-single,pins = <
+			AM33XX_PADCONF(AM335X_PIN_GPMC_A2, PIN_OUTPUT, MUX_MODE6) /* SERVO1 */
+			AM33XX_PADCONF(AM335X_PIN_GPMC_A3, PIN_OUTPUT, MUX_MODE6) /* SERVO2 */
+		>;
+	};
+	sikula_pwm2: pinmux_sikula_pwm2_pins {
+		pinctrl-single,pins = <
+			AM33XX_PADCONF(AM335X_PIN_GPMC_AD9, PIN_OUTPUT, MUX_MODE4) /* MOTOR PWM R */
+			AM33XX_PADCONF(AM335X_PIN_GPMC_AD8, PIN_OUTPUT, MUX_MODE4) /* MOTOR PWM L */
+		>;
+	};
+	sikula_eqep2: pinmux_sikula_eqep2_pins {
+		pinctrl-single,pins = <
+			AM33XX_PADCONF(AM335X_PIN_GPMC_AD12, PIN_INPUT_PULLUP, MUX_MODE4) /* CODER_R_A */
+			AM33XX_PADCONF(AM335X_PIN_GPMC_AD13, PIN_INPUT_PULLUP, MUX_MODE4) /* CODER_R_B */
+		>;
+	};
+	sikula_i2c1: pinmux_sikula_i2c1_pins {
+		pinctrl-single,pins = <
+			AM33XX_PADCONF(AM335X_PIN_SPI0_CS0, PIN_INPUT_PULLUP, MUX_MODE2) /* I2C1_SCL */
+			AM33XX_PADCONF(AM335X_PIN_SPI0_D1, PIN_INPUT_PULLUP, MUX_MODE2) /* I2C1_SDA */
+		>;
+	};
+	sikula_i2c2: pinmux_sikula_i2c2_pins {
+		pinctrl-single,pins = <
+			AM33XX_PADCONF(AM335X_PIN_UART1_RTSN, PIN_INPUT_PULLUP, MUX_MODE3) /* I2C2_SCL */
+			AM33XX_PADCONF(AM335X_PIN_UART1_CTSN, PIN_INPUT_PULLUP, MUX_MODE3) /* I2C2_SDA */
+		>;
+	};
+	sikula_uart1: pinmux_sikula_uart1_pins {
+		pinctrl-single,pins = <
+			AM33XX_PADCONF(AM335X_PIN_UART1_TXD, PIN_OUTPUT, MUX_MODE0) /* SERIAL2_TXD2 */
+			AM33XX_PADCONF(AM335X_PIN_UART1_RXD, PIN_INPUT_PULLUP, MUX_MODE0) /* SERIAL2_RXD2 */
+		>;
+	};
+	sikula_uart4: pinmux_sikula_uart4_pins {
+		pinctrl-single,pins = <
+			AM33XX_PADCONF(AM335X_PIN_GPMC_WAIT0, PIN_INPUT, MUX_MODE6) /* AX12_RX */
+			AM33XX_PADCONF(AM335X_PIN_GPMC_WPN, PIN_OUTPUT, MUX_MODE6) /* AX12_TX */
+			AM33XX_PADCONF(AM335X_PIN_LCD_DATA13, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* AX12_DIRECTION */
+		>;
+	};
+};
+
+&i2c1 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&sikula_i2c1>;
+};
+
+&i2c2 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&sikula_i2c2>;
+
+	ds1307@68 {
+		compatible = "ds1307";
+		reg = <0x68>;
+		status = "okay";
+	};
+};
+
+&uart1 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&sikula_uart1>;
+};
+
+&uart4 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&sikula_uart4>;
+	rs485-rts-delay = <0 0>;
+	rs485-rts-active-high;
+	rts-gpios = <&gpio0 9 GPIO_ACTIVE_HIGH>;
+	linux,rs485-enabled-at-boot-time;
+};
+
+&epwmss0 {
+	status = "okay";
+};
+
+&ehrpwm0 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&sikula_pwm0>;
+};
+
+&epwmss0 {
+	eqep0: counter@180 {
+		compatible = "ti,am3352-eqep";
+		reg = <0x180 0x80>;
+		clocks = <&l4ls_gclk>;
+		clock-names = "fck";
+		interrupts = <79>;
+
+		status = "okay";
+		pinctrl-names = "default";
+		pinctrl-0 = <&sikula_eqep0>;
+	};
+};
+
+&epwmss1 {
+	status = "okay";
+};
+
+&ehrpwm1 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&sikula_pwm1>;
+};
+
+&epwmss2 {
+	status = "okay";
+};
+
+&ehrpwm2 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&sikula_pwm2>;
+};
+
+&epwmss2 {
+	eqep2: counter@180 {
+		compatible = "ti,am3352-eqep";
+		reg = <0x180 0x80>;
+		clocks = <&l4ls_gclk>;
+		clock-names = "fck";
+		interrupts = <89>;
+
+		status = "okay";
+		pinctrl-names = "default";
+		pinctrl-0 = <&sikula_eqep2>;
+	};
+};
+
+&rtc {
+	status = "disabled";
+};
+
+&tscadc {
+	status = "okay";
+	adc {
+		ti,adc-channels = <0 1 2 3 4 5 6 7>;
+	};
+};

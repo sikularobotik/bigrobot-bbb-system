@@ -1,0 +1,1 @@
+sikula -1 users -1 =robotpass /home/sikula /bin/sh wheel Sikula user
