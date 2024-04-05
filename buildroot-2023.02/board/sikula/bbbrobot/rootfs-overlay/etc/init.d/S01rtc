@@ -1,9 +1,0 @@
-#!/bin/sh
-
-if [ "$1" == "start" ]
-then
-	modprobe rtc-ds1307
-	hwclock -su
-fi
-
-exit $?
