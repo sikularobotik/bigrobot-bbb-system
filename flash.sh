@@ -1,5 +1,7 @@
 #!/bin/bash
 
+BUILDROOT="buildroot-2024.02.1"
+
 if [ "$1" == "" ]
 then
 	echo "Usage: $0 <dev>"
@@ -15,8 +17,11 @@ fi
 SL="\x1b[1;34m"
 EL="\x1b[0m"
 
-echo -e "${SL}Flashing sdcard.img...${EL}"
-dd if=$(dirname $0)/buildroot-2023.02/output/images/sdcard.img of=$1
+SDCARD=$(dirname $0)/$BUILDROOT/output/images/sdcard.img
+[ ! -f $SDCARD ] && echo -e "${SL}Error, sdcard.img not found for ${BUILDROOT}!${EL}" && exit
+
+echo -e "${SL}Flashing sdcard.img from ${BUILDROOT}...${EL}"
+dd if=$SDCARD of=$1 status=progress
 
 echo -e "${SL}Resize partition 2${EL}"
 parted $1 resizepart 2 100%
