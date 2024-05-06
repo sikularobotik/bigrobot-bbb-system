@@ -42,6 +42,8 @@ then
 		wpa_passphrase "$2" "$3" | grep -v '#psk' > /tmp/wpa.conf
 	fi
 
+	ip addr del 172.23.0.42 dev wlan0
+
 	wpa_supplicant -c /tmp/wpa.conf -i wlan0 &
 	dhcpcd wlan0 &
 fi
